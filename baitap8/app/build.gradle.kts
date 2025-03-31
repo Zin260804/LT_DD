@@ -45,4 +45,6 @@ dependencies {
     implementation ("me.relex:circleindicator:2.1.6")
     implementation ("me.relex:circleindicator:2.1.6")
     implementation ("com.github.ictfoysal:multilibrary:6.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 }

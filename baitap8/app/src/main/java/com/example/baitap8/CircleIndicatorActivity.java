@@ -3,11 +3,7 @@ package com.example.baitap8;
 import android.os.Bundle;
 import android.os.Handler;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.baitap8.adapter.ImagesViewPagerAdapter;
@@ -15,8 +11,6 @@ import com.example.baitap8.model.Images;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 

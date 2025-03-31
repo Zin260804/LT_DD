@@ -31,4 +31,8 @@ public class ImagesSlider implements Serializable {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
+    public ImagesSlider(String avatar) {
+        this.avatar = avatar;
+    }
 }

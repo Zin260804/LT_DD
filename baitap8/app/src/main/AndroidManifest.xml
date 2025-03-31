@@ -18,7 +18,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".CircleIndicator3Activity"
+            android:name=".SliderViewActivity"
             android:exported="false" />
         <activity
             android:name=".CircleIndicatorActivity"
@@ -33,7 +33,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SliderViewActivity"
+            android:name=".CircleIndicator3Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,24 +2,35 @@ package com.example.baitap8;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.baitap8.adapter.ImageSliderAdapter;
 import com.example.baitap8.adapter.ImagesViewPager2Adapter;
 import com.example.baitap8.model.Images;
+import com.example.baitap8.model.ImagesSlider;
+import com.example.baitap8.model.MessageModel;
+import com.example.baitap8.retrofit.APIService;
+import com.example.baitap8.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CircleIndicator3Activity extends AppCompatActivity {
 
     private ViewPager2 viewPager2;
     private CircleIndicator3 circleIndicator3;
-    private List<Images> imagesList1;
+    private List<ImagesSlider> imagesList1;
+    APIService apiService;
+    ImagesViewPager2Adapter imagesViewPager2Adapter;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
         @Override
@@ -50,14 +61,9 @@ public class CircleIndicator3Activity extends AppCompatActivity {
         circleIndicator3 = findViewById(R.id.circle_indicator3);
 
         // Lấy dữ liệu hình ảnh
-        imagesList1 = getListImages();
+        getListImages();
 
-        // Gắn adapter
-        ImagesViewPager2Adapter adapter1 = new ImagesViewPager2Adapter(imagesList1);
-        viewPager2.setAdapter(adapter1);
 
-        // Liên kết ViewPager2 với Indicator
-        circleIndicator3.setViewPager(viewPager2);
 
         // Gọi lần đầu
         handler.postDelayed(runnable, 3000);
@@ -75,14 +81,27 @@ public class CircleIndicator3Activity extends AppCompatActivity {
 
     }
 
-    private List<Images> getListImages() {
-        List<Images> list = new ArrayList<>();
-        list.add(new Images(R.drawable.baseline_call_24));
-        list.add(new Images(R.drawable.baseline_chat_24));
-        list.add(new Images(R.drawable.ic_launcher_foreground));
-        list.add(new Images(R.drawable.baseline_camera_alt_24));
-        return list;
+    private void getListImages() {
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.LoadImageSlider(1).enqueue(new Callback<MessageModel>() {
+            @Override
+            public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
+                if (response.body() != null && response.body().isSuccess()) {
+                    imagesList1 = response.body().getResult();
+                    ImageSliderAdapter adapter = new ImageSliderAdapter(CircleIndicator3Activity.this, imagesList1);
+                    viewPager2.setAdapter(adapter);
+                    circleIndicator3.setViewPager(viewPager2);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageModel> call, Throwable t) {
+                Log.e("API_ERROR", "Error: " + t.getMessage());
+            }
+        });
     }
+
+
     public class DepthPageTransformer implements ViewPager2.PageTransformer {
         private static final float MIN_SCALE = 0.75f;
 
