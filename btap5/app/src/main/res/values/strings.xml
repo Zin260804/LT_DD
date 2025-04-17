@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">btap5</string>
-    <string name="error_field_required">Email khong đuoc rong</string>
-    <string name="error_invalid_email">Email không đung định dạng</string>
-    <string name="error_invalid_password">Mat khẩu phải lớn hơn 4 ký tu</string>
-</resources>
