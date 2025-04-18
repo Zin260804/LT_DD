@@ -102,7 +102,7 @@ public class ViDuActivity extends AppCompatActivity {
 
         //progrebar
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar2);
-        img2.setOnClickListener(new View.OnClickListener() {
+            img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //tự đếm progress
